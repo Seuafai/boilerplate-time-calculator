@@ -1,46 +1,37 @@
 def add_time(start, duration, weekday = 1):
-  #Hmmmm h = 60m d = 24h, m = 1 so w  = 7d
   days = []
   hours = []
   minutes = []
   ampm = []
   lastday = []
-  #new_time = ()
-  
-    #Take and convert start time data
-  #s = start.split(" ")
+    
+  #Take and convert start time data
   stime, meridian = start.split(" ")
-  #stime = s[0]
   sh, sm = stime.split(":")
   sh = int(sh)
   sm = float(sm)
-  #meridian = s[1]
   if meridian == "AM":
     sh = sh
   elif meridian == "PM":
     sh = sh + 12
   else:
     print("Error: meridian not AM or PM" )
-  #shmtime = sh, sm
   dstime = sh + sm/60
   #Take and convert duration time data
   d = duration.split(":")
   dh = int(d[0])
   dm = float(d[1])
-  #dtime = dh, dm
   ddtime = dh + dm/60
   #calculate start + duration
   ftime = dstime + ddtime
-    #Convert ftime str to split again and reconvert to int ffs
+  #Convert ftime str to split again and reconvert to int ffs
   ftime = str(ftime)
-    #separate  back into hours and minutes
+  #separate  back into hours and minutes
   ftime_hours, ftime_minutes = ftime.split(".")
   ftime_hours = int(ftime_hours)
-  #ftime_minutes = ftime[1]
   ftime_minutes = float("." + ftime_minutes)
-  #ftime_minutes = float(ftime_minutes)
-    #Do the time calculations
-    #hours value for final answer
+  #Do the time calculations
+  #hours value for final answer
   remainder = ftime_hours % 24
   if remainder >= 13: 
     hoursans = remainder - 12
@@ -59,7 +50,6 @@ def add_time(start, duration, weekday = 1):
   #Find days
   if ftime_hours > 24:
     fdays = ftime_hours/24
-    #print(fdays)
     fdays = str(fdays)
     fdays = fdays.split(".")
     fdays = fdays[0]
@@ -70,7 +60,6 @@ def add_time(start, duration, weekday = 1):
     print("Error: minutes showing 60 or higher")
   else:
     ftime_minutes = int(round(ftime_minutes, 0))
-    
     if ftime_minutes == 0:
       ftime_minutes = "00"
       minutes.append(ftime_minutes)
