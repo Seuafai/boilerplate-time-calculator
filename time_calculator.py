@@ -4,7 +4,6 @@ def add_time(start, duration, weekday = 1):
   minutes = []
   ampm = []
   lastday = []
-    
   #Take and convert start time data
   stime, meridian = start.split(" ")
   sh, sm = stime.split(":")
@@ -30,7 +29,6 @@ def add_time(start, duration, weekday = 1):
   ftime_hours, ftime_minutes = ftime.split(".")
   ftime_hours = int(ftime_hours)
   ftime_minutes = float("." + ftime_minutes)
-
   #print(ftime_hours)
   #Do the time calculations
   #hours value for final answer
@@ -38,7 +36,6 @@ def add_time(start, duration, weekday = 1):
   if remainder < 1: 
     hoursans = 12
     hours.append(hoursans)
-    #print(remainder)
   elif remainder >= 13:
     hoursans = remainder - 12
     hours.append(hoursans)
@@ -52,20 +49,16 @@ def add_time(start, duration, weekday = 1):
     ampmans = "AM"
     ampm.append(ampmans)
   #Find days
-  #print(ftime_hours)
   fdays = float(ftime_hours/24)
   if fdays < 1:
     fdays = 0
     days.append(fdays)
-    #print(fdays)
   else:
     fdays = str(fdays)
     fdays = fdays.split(".")
     fdays = fdays[0]
     fdays = int(fdays)
     days.append(fdays)
-    #print(days)
-    
   #Deal with minutes part of answer
   ftime_minutes = ftime_minutes * 60
   if ftime_minutes >= 60:
@@ -86,19 +79,15 @@ def add_time(start, duration, weekday = 1):
   weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   if weekday != 1:
     weekday = str(weekday.capitalize())
-    #print(weekday)
   if weekday in weekdays:
     startday = weekdays.index(weekday)
-    #print(startday)
     startday = int(startday)
     endday = startday + int(days[0])
-    #print(endday)
     if int(days[0]) > 1 and int(days[0]) < 8:
       endday = weekdays[endday]
       lastday.append(endday)
     elif int(days[0]) >= 8:
       endday = (startday + int(days[0])) % 7
-      #print(endday)
       endday = weekdays[endday]
       lastday.append(endday)
     elif int(days[0]) == 1 :
@@ -107,28 +96,20 @@ def add_time(start, duration, weekday = 1):
         endday = endday % 7
         endday = weekdays[endday]
         lastday.append(endday)
-        #print(lastday)
       else:
         endday = weekday[endday]
         lastday.append(endday)
-      #print(endday, lastday)
   #return new time with correct statements and formats
-  #print(days)
-  #print(hours)
   if days[0] == 1 and weekday == 1:
     new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + " " + "(next day)"
   elif days[0] > 1 and weekday == 1:
     new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + " " + "(" + str(days[0]) + " days later)"
   elif days[0] < 1 and weekday == 1:
     new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0])
-  #elif days[0] == 2 and weekday == 1:
-    #new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + " " + "(" + str(days[0]) + " days later)"
   if days[0] == 1 and weekday != 1:
-    #new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + ", " + str(lastday[0]) + " (next day)"
     new_time = start + ", " + str(lastday[0]) + " (next day)"
   elif days[0] > 1 and weekday != 1:
     new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + ", " + str(lastday[0]) + " " + "(" + str(days[0]) + " days later)"
   elif days[0] < 1 and weekday != 1:
-    new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + ", " + weekday
-  #print(str(days[0]))           
+    new_time = str(hours[0]) + ":" + str(minutes[0]) + " " + str(ampm[0]) + ", " + weekday           
   return new_time
